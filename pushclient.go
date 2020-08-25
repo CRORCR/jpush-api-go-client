@@ -12,6 +12,7 @@ const (
 	SUCCESS_FLAG  = "msg_id"
 	HOST_NAME_SSL = "https://api.jpush.cn/v3/push"
 	HOST_SCHEDULE = "https://api.jpush.cn/v3/schedules"
+	HOST_GROUP    = "https://api.jpush.cn/v3/grouppush"
 	HOST_REPORT   = "https://report.jpush.cn/v3/received"
 	BASE64_TABLE  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 )
@@ -34,6 +35,10 @@ func NewPushClient(secret, appKey string) *PushClient {
 
 func (this *PushClient) Send(data []byte) (string, error) {
 	return this.SendPushBytes(data)
+}
+
+func (this *PushClient) SendGroup(data []byte) (string, error) {
+	return this.SendGroupPushBytes(data, HOST_GROUP)
 }
 func (this *PushClient) CreateSchedule(data []byte) (string, error) {
 	// this.BaseUrl = HOST_SCHEDULE
@@ -81,6 +86,11 @@ func (this *PushClient) SendPushBytes(content []byte) (string, error) {
 	} else {
 		return "", errors.New(ret)
 	}
+}
+
+func (this *PushClient) SendGroupPushBytes(content []byte, url string) (string, error) {
+	ret, err := SendPostBytes2(url, content, this.AuthCode)
+	return ret, err
 }
 
 func (this *PushClient) SendScheduleBytes(content []byte, url string) (string, error) {
