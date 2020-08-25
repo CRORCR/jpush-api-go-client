@@ -43,6 +43,11 @@ func (this *PushClient) DeleteSchedule(id string) (string, error) {
 	// this.BaseUrl = HOST_SCHEDULE
 	return this.SendDeleteScheduleRequest(id, HOST_SCHEDULE)
 }
+
+func (this *PushClient) DeleteMsg(msgId string) (string, error) {
+	return this.SendDeleteScheduleRequest(msgId, HOST_NAME_SSL)
+}
+
 func (this *PushClient) GetSchedule(id string) (string, error) {
 	// GET https://api.jpush.cn/v3/schedules/{schedule_id}
 	// this.BaseUrl = HOST_SCHEDULE
