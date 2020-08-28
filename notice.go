@@ -1,7 +1,7 @@
 package jpushclient
 
 type Notice struct {
-	Alert    Alert           `json:"alert,omitempty"`
+	Alert    string          `json:"alert,omitempty"`
 	Android  *AndroidNotice  `json:"android,omitempty"`
 	IOS      *IOSNotice      `json:"ios,omitempty"`
 	WINPhone *WinPhoneNotice `json:"winphone,omitempty"`
@@ -36,7 +36,7 @@ type WinPhoneNotice struct {
 	Extras   map[string]interface{} `json:"extras,omitempty"`
 }
 
-func (this *Notice) SetAlert(alert Alert) {
+func (this *Notice) SetAlert(alert string) {
 	this.Alert = alert
 }
 
